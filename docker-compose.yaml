@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  satagro_web:
+    build: ./satagro
+    command: ["python","manage.py", "runserver", "0.0.0.0:8000"]
+    volumes:
+      - ./satagro:/satagro
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_HOST
+      - POSTGRES_PORT
+      - POSTGRES_NAME
+    depends_on:
+      - satagro_db
+  satagro_db:
+    image: kartoza/postgis:15-3.3
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+
+      

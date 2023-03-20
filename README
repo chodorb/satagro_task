@@ -1,0 +1,16 @@
+To run the application:
+1. run docker-compose up --build
+2. run `python manage.py makemigrations` and `python manage.py migrate` within the docker container
+
+To fetch the sample techlines and fields run `python manage.py fetch_data` within the docker container
+
+You can add both Techlines and Fields via django-admin. 
+Create a super user running `python manage.py createsuperuser` within the docker container, and use it to log into the admin panel.
+
+Endpoints:
+/api/v1/fields/{field_id} - Endpoint serving field data
+/api/v1/fields/{field_id}/techlines - Endpoint serving field data with techlines
+
+Note:
+There is a known error of postgis databases container starting after the django app, ATM the workaround I propose is hot realoading the django applications (Ctr/Cmd + S in any .py file within the app)
+In the future it can be fixed by the implementations of wait-for.sh script.
